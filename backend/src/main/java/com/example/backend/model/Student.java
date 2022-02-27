@@ -19,15 +19,17 @@ public class Student {
 	String division;
 	String gender;
 	String dob;
+	int rollNumber;
 	
 	
 	
-	public Student(String name, String standard, String division, String gender, String dob) {
+	public Student(String name, String standard, String division, String gender, String dob, int rollNumber) {
 		this.name = name;
 		this.standard = standard;
 		this.division = division;
 		this.gender = gender;
 		this.dob = dob;
+		this.rollNumber = rollNumber;
 	}
 
 	public String getName() {
@@ -70,13 +72,19 @@ public class Student {
 		this.dob = dob;
 	}
 
+	public int getRollNumber() {
+       return rollNumber;
+	}
 	
+	public void setRollNumber(int rollNumber) {
+		this.rollNumber = rollNumber;
+	}
 
 	public String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
 
-    public void setRollNumber(int sequenceNumber) {
-    }
+    
+    
 	
 }
