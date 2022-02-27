@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.backend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DbSequence { // class for the generating the unique roll number.
+public class DbSequence { 
     @Id
     private String  id;
     private int seq;
@@ -23,4 +23,3 @@ public class DbSequence { // class for the generating the unique roll number.
 	}
 
 }
-

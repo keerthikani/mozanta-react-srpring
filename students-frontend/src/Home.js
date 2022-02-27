@@ -9,11 +9,11 @@ class Students extends Component {
     super();
     this.state = {
       students: [],
-      userName: "",
-      birthday: "",
-      class: "",
+      name: "",
+      standard: "",
       division: "",
       gender: "",
+      dob: "",
       nameError: "",
       formError: "",
     };
@@ -21,15 +21,15 @@ class Students extends Component {
     this.submit = this.submit.bind(this);
   }
   componentDidMount() {
-    axios.get("http://localhost:8080/students").then((res) => {
+    axios.get("http://localhost:8080/getAllByName").then((res) => {
       this.setState({
         students: res.data,
         id: 0,
-        userName: "",
-        birthday: "",
-        class: "",
+        name: "",
+        standard: "",
         division: "",
         gender: "",
+        dob: "",
         nameError: "",
         formError: "",
       });
@@ -40,16 +40,14 @@ class Students extends Component {
       [event.target.name]: event.target.value,
     });
   }
-  submit(
-    event //fuction for handling submit
-  ) {
+  submit(event) {
     
     if (
-      this.state.userName === "" ||
-      this.state.birthday === "" ||
-      this.state.class === "" ||
+      this.state.name === "" ||
+      this.state.standard === "" ||
       this.state.division === "" ||
-      this.state.gender === ""
+      this.state.gender === "" ||
+      this.state.dob === ""
     ) {
       this.setState({
         formError: "enter all fields in the form",
@@ -59,7 +57,7 @@ class Students extends Component {
         formError: "",
       });
       const regex = /^[A-Za-z ]*$/;
-      let isValid = this.state.userName.match(regex); 
+      let isValid = this.state.name.match(regex); 
       if (isValid) {
         this.setState({
           nameError: "",
@@ -67,11 +65,11 @@ class Students extends Component {
         axios
           .post("http://localhost:8080/send", {
             
-            userName: this.state.userName,
-            standard: this.state.class,
+            userName: this.state.name,
+            standard: this.state.standard,
             division: this.state.division,
             gender: this.state.gender,
-            dob: this.state.birthday,
+            dob: this.state.dob,
           })
           .then((res) => {
             
@@ -100,8 +98,8 @@ class Students extends Component {
                     type="text"
                     placeholder="Name"
                     className=" form-control name-field w-75 mx-auto "
-                    name="userName"
-                    value={this.state.userName}
+                    name="name"
+                    value={this.state.name}
                     onChange={this.handleChange}
                     pattern="^[A-Za-z ]+$"
                     required
@@ -109,7 +107,7 @@ class Students extends Component {
                   <pre className="error  text-center">
                     {this.state.nameError}
                   </pre>{" "}
-                  {/* for showing studentname error*/}
+                  
                   <br></br>
                   <div className="dob  text-center">
                     <label htmlFor="dob" className=" mx-auto text-center">
@@ -117,11 +115,11 @@ class Students extends Component {
                     </label>
                     <input
                       type="date"
-                      id="birthday"
+                      id="dob"
                       className="form-control form-control-sm w-75 mx-auto"
-                      value={this.state.birthday}
+                      value={this.state.dob}
                       onChange={this.handleChange}
-                      name="birthday"
+                      name="dob"
                     />
                   </div>
                   <br />
@@ -183,7 +181,7 @@ class Students extends Component {
                   <pre className="error  text-center">
                     {this.state.formError}
                   </pre>{" "}
-                  {/* for showing input fields error*/}
+                  
                   <div className="text-center">
                     <button
                       type="button"
@@ -216,7 +214,7 @@ class Students extends Component {
                       student 
                     ) => (
                       <tr scope="row" key={student.rollNumber}>
-                        <td>{student.userName}</td>
+                        <td>{student.name}</td>
                         <td>{student.standard}</td>
                         <td>{student.division}</td>
                         <td>{student.gender}</td>

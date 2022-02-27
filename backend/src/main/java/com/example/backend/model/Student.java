@@ -1,0 +1,82 @@
+package com.example.backend.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "student")
+public class Student { 
+
+	
+	 @Transient
+	 public static final String SEQUENCE_NAME = "user_sequence"; 
+	
+
+	@Id
+	String id;
+	String name;
+	String standard;
+	String division;
+	String gender;
+	String dob;
+	
+	
+	
+	public Student(String name, String standard, String division, String gender, String dob) {
+		this.name = name;
+		this.standard = standard;
+		this.division = division;
+		this.gender = gender;
+		this.dob = dob;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStandard() {
+		return standard;
+	}
+
+	public void setStandard(String standard) {
+		this.standard = standard;
+	}
+
+	public String getDivision() {
+		return division;
+	}
+
+	public void setDivision(String division) {
+		this.division = division;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	
+
+	public String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
+
+    public void setRollNumber(int sequenceNumber) {
+    }
+	
+}
