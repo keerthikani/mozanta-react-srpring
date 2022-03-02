@@ -41,7 +41,8 @@ class Students extends Component {
     });
   }
   submit(event) {
-    
+    console.log("HELLO", this.state);
+
     if (
       this.state.name === "" ||
       this.state.standard === "" ||
@@ -57,22 +58,20 @@ class Students extends Component {
         formError: "",
       });
       const regex = /^[A-Za-z ]*$/;
-      let isValid = this.state.name.match(regex); 
+      let isValid = this.state.name.match(regex);
       if (isValid) {
         this.setState({
           nameError: "",
         });
         axios
           .post("http://localhost:8080/send", {
-            
-            userName: this.state.name,
+            name: this.state.name,
             standard: this.state.standard,
             division: this.state.division,
             gender: this.state.gender,
             dob: this.state.dob,
           })
           .then((res) => {
-            
             this.componentDidMount();
           });
       } else {
@@ -107,7 +106,6 @@ class Students extends Component {
                   <pre className="error  text-center">
                     {this.state.nameError}
                   </pre>{" "}
-                  
                   <br></br>
                   <div className="dob  text-center">
                     <label htmlFor="dob" className=" mx-auto text-center">
@@ -126,17 +124,24 @@ class Students extends Component {
                   <div className="standard text-center">
                     <label htmlFor="class">Class details</label>
                     <select
-                      value={this.state.class}
-                      name="class"
+                      value={this.state.standard}
+                      name="standard"
                       className="form-control form-control-sm w-75 mx-auto"
                       onChange={this.handleChange}
                     >
-                      <option value="">Select Class</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                      <option value="">Select Standard</option>
+                      <option value="1">I</option>
+                      <option value="2">II</option>
+                      <option value="3">III</option>
+                      <option value="4">IV</option>
+                      <option value="5">V</option>
+                      <option value="6">VI</option>
+                      <option value="7">VII</option>
+                      <option value="8">VIII</option>
+                      <option value="9">IX</option>
+                      <option value="10">X</option>
+                      <option value="11">X11</option>
+                      <option value="12">X12</option>
                     </select>
                     <br />
                     <select
@@ -149,7 +154,6 @@ class Students extends Component {
                       <option value="A">A</option>
                       <option value="B">B</option>
                       <option value="C">C</option>
-                      <option value="C">D</option>
                     </select>
                     <br />
                   </div>
@@ -181,7 +185,6 @@ class Students extends Component {
                   <pre className="error  text-center">
                     {this.state.formError}
                   </pre>{" "}
-                  
                   <div className="text-center">
                     <button
                       type="button"
@@ -209,19 +212,15 @@ class Students extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.students.map(
-                    (
-                      student 
-                    ) => (
-                      <tr scope="row" key={student.rollNumber}>
-                        <td>{student.name}</td>
-                        <td>{student.standard}</td>
-                        <td>{student.division}</td>
-                        <td>{student.gender}</td>
-                        <td>{student.dob}</td>
-                      </tr>
-                    )
-                  )}
+                  {this.state.students.map((student) => (
+                    <tr scope="row" key={student.rollNumber}>
+                      <td>{student.name}</td>
+                      <td>{student.standard}</td>
+                      <td>{student.division}</td>
+                      <td>{student.gender}</td>
+                      <td>{student.dob}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
